@@ -16,7 +16,7 @@ class CorrelationApp:
 
     def _register_widgets(self):
 
-        self._und_options = ["NESN", "NOVN", "ROG", "TSLA", "VOW"]
+        self._und_options = ["NESN.SW", "NOVN.SW", "ROG.SW", "GIVN.SW", "TSLA", "VOW3.DE"]
         self._und1 = widgets.Dropdown(
             options=self._und_options,
             description="Underlying1:",
