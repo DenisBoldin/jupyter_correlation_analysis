@@ -87,8 +87,7 @@ class CorrelationApp:
         self._figure.update_layout(
             xaxis_title="Dates",
             yaxis_title="Values",
-            legend=dict(orientation="h", y=1.02, yanchor="bottom"),
-            height=450
+            legend=dict(orientation="h", y=1.02, yanchor="bottom")
         )
 
     def _event_handler(self, _):
