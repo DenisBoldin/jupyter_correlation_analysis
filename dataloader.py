@@ -1,5 +1,5 @@
 import pandas as pd
-
+from pandas_datareader import data as web
 
 class DataLoader:
 
@@ -17,7 +17,7 @@ class DataLoader:
     @staticmethod
     def _load_und(und):
         try:
-            return pd.read_csv('https://github.com/DenisBoldin/jupyter_correlation_analysis/blob/main/data/{0}.csv'.format(und), index_col=0, parse_dates=True)
+            return web.get_data_yahoo(und, start="2010-01-01")
         except:
             raise Exception("Failed to load data for {0}".format(und))
             
