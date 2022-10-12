@@ -17,6 +17,7 @@ class DataLoader:
     @staticmethod
     def _load_und(und):
         try:
-            return pd.read_csv('data/{0}.csv'.format(und), index_col=0, parse_dates=True)
+            return pd.read_csv('https://github.com/DenisBoldin/jupyter_correlation_analysis/blob/main/data/{0}.csv'.format(und), index_col=0, parse_dates=True)
         except:
             raise Exception("Failed to load data for {0}".format(und))
+            
