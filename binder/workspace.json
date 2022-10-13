@@ -2,13 +2,7 @@
    "data":{
       "layout-restorer:data":{
          "main":{
-            "dock":{
-               "type":"tab-area",
-               "currentIndex":1,
-               "widgets":[
-                  "notebook:CorrelationApp.ipynb"
-               ]
-            },
+            "dock":null,
             "current":"notebook:CorrelationApp.ipynb"
          },
          "down":{
@@ -48,7 +42,7 @@
    },
    "metadata":{
       "id":"new-workspace",
-      "last_modified":"2022-10-13T07:07:04.329684+00:00",
-      "created":"2022-10-13T07:07:04.329684+00:00"
+      "last_modified":"2022-10-13T07:40:53.763790+00:00",
+      "created":"2022-10-13T07:40:53.763790+00:00"
    }
 }
