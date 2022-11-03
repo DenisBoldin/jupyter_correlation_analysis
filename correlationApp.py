@@ -12,7 +12,7 @@ class CorrelationApp:
         self.calculator = None
 
     def run(self):
-        return widgets.VBox([self._vbox1, self._vbox2, self._vbox3])
+        return widgets.VBox([self._add_und, self._vbox1, self._vbox2, self._vbox3])
 
     def _register_widgets(self):
 
@@ -61,6 +61,13 @@ class CorrelationApp:
             value=1,
             description="Return:")
 
+        self._add_und = widgets.Text(
+            value='',
+            placeholder='Add Yahoo Ticker and hit Enter',
+            description='',
+            disabled=False
+        )
+
         hbox1 = widgets.HBox([self._und1, self._und2])
         hbox2 = widgets.HBox([self._methods, self._quantiles, self._apply_max])
         hbox3 = widgets.HBox([self._returns, self._smoothing_windows, self._corr_windows])
@@ -92,6 +99,12 @@ class CorrelationApp:
 
     def _event_handler(self, _):
 
+        if self._und1.value is not None:
+            self.update_dropdown_options(self._und2, self._und1.value)
+
+        if self._und2.value is not None:
+            self.update_dropdown_options(self._und1, self._und2.value)
+
         if self._und1.value is not None and self._und2.value is not None:
             if self._und1.value != self._und1_previous_value or self._und2.value != self._und2_previous_value:
                 try:
@@ -104,6 +117,21 @@ class CorrelationApp:
                     self._result.value = str(ex)
             if self.calculator is not None:
                 self._event_handler_main_ui()
+
+    def update_dropdown_options(self, dropdown, value_taken):
+        dropdown.unobserve(self._event_handler, names="value")
+        prev_value = dropdown.value
+        dropdown.options = [option for option in self._und_options if option != value_taken]
+        dropdown.value = prev_value
+        dropdown.observe(self._event_handler, names="value")
+
+    def on_submitted(self, _):
+        if self._add_und.value not in self._und_options:
+            self._und_options.append(self._add_und.value)
+            self._und_options.sort()
+            self.update_dropdown_options(self._und1, self._und2.value)
+            self.update_dropdown_options(self._und2, self._und1.value)
+        self._add_und.value = ""
 
     def _event_handler_main_ui(self):
         if self._methods.value == "Quantile":
@@ -133,6 +161,7 @@ class CorrelationApp:
         self._corr_windows.observe(self._event_handler, names="value")
         self._und1.observe(self._event_handler, names="value")
         self._und2.observe(self._event_handler, names="value")
+        self._add_und.on_submit(self.on_submitted)
 
     @staticmethod
     def _slide_options():
