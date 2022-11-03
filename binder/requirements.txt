@@ -1,5 +1,5 @@
 pandas==1.0.5
 numpy==1.18.5
-ipywidgets==7.5.1
+ipywidgets==8.0.0
 plotly==5.10.0
 pandas-datareader==0.10.0
